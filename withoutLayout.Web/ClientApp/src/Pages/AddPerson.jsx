@@ -22,7 +22,7 @@ class AddPerson extends React.Component {
     typingHasAccured = () => {
         const property = e.target.name;
         this.setState({ property: e.target.value });
-        //didnt check if this version works. what must i do to use immer? my posting doesn't work. when will you finish this?//
+        //didnt check if this version works. what must i do to use immer? my posting doesn't work. when will you finish this?
     }
 
     weTypedFN = e => {
