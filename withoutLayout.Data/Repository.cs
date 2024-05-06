@@ -41,12 +41,6 @@ namespace withoutLayout.Data
             context.Remove(p);
         }
 
-        public List<Car> GetCarsByID(int id)
-        {
-            using var context = new PeopleCarsDataContext(_connectionString);
-            return context.Cars.Where(c => c.Person.ID == id).ToList();
-        }
-
         public void AddCar(Car c)
         {
             using var context = new PeopleCarsDataContext(_connectionString);
@@ -57,8 +51,14 @@ namespace withoutLayout.Data
         public Person GetByID(int id)
         {
             using var context = new PeopleCarsDataContext(_connectionString);
-            Person foundYou = context.People.FirstOrDefault(p => p.ID == id);
-            return foundYou;
+            List<Person> list = context.People.Where(p => p.ID == id).Include(p => p.Cars).ToList();
+            return list[0];
+        }
+
+        public void DeleteAllCars(int id)
+        {
+            using var context = new PeopleCarsDataContext(_connectionString);
+            context.Database.ExecuteSqlInterpolated($"DELETE FROM Cars WHERE PersonID = {id}");
         }
     }
 }

@@ -2,7 +2,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import withRouter from './withRouter';
 import axios from 'axios';
-/*import { produce } from 'immer';*/
 
 class AddPerson extends React.Component {
     state = {
@@ -14,7 +13,6 @@ class AddPerson extends React.Component {
     weClickedAdd = async () => {
 
         const { firstName, lastName, age } = this.state;
-       /* console.log({ firstName, lastName, age });*/
         await axios.post('/api/people/add', { firstName, lastName, age });
         this.props.navigate('/')
     }
@@ -22,7 +20,7 @@ class AddPerson extends React.Component {
     typingHasAccured = () => {
         const property = e.target.name;
         this.setState({ property: e.target.value });
-        //didnt check if this version works. what must i do to use immer? my posting doesn't work. when will you finish this?
+        //didnt check if this version works. what must i do to use immer?
     }
 
     weTypedFN = e => {
